@@ -15,35 +15,35 @@ O objetivo principal deste projeto é criar um sistema de agendamento para barbe
 
 ## Funcionalidades
 
-## Cadastro de Profissionais - 
+Cadastro de Profissionais - 
  Permite que novos barbeiros sejam cadastrados no sistema.
 
-## Agendamento de Serviços:
+ Agendamento de Serviços:
  Clientes podem agendar serviços com os funcionários disponíveis.
 
-## Visualização de Agendamentos:
+ Visualização de Agendamentos:
  Funcionalidade para visualizar os agendamentos realizados.
 
 
 ## Tecnologias Utilizadas
 Java 11+: Linguagem principal para desenvolvimento do backend.
 
-## Spring Boot: 
+ Spring Boot: 
 Framework para construção do aplicativo web, facilitando a configuração e o desenvolvimento.
 
-## Spring MVC: 
+ Spring MVC: 
 Para o padrão Model-View-Controller na aplicação.
 
-## Spring Data JPA:
+ Spring Data JPA:
  Para interação com o banco de dados usando JPA/Hibernate.
 
-## Banco de Dados MySQL:
+ Banco de Dados MySQL:
  Armazenamento dos dados de usuários, serviços e agendamentos.
 
-## HTML, CSS e Thymeleaf:
+ HTML, CSS e Thymeleaf:
  Para construção das páginas web e integração dinâmica com o backend.
 
-## Maven: 
+ Maven: 
 Para gerenciamento de dependências e build do projeto.
 
 ## Estrutura do Projeto
