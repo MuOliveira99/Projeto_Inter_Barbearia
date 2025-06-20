@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendamento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('/img/local.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+            width: 380px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .back-button {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2 class="text-center text-2xl font-bold text-gray-700 mb-4">Agendamento</h2>
+
+        <!-- Mensagem de sucesso -->
+        <div th:if="${mensagem}" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            <p th:text="${mensagem}"></p>
+        </div>
+
+        <form th:action="@{/agendamento}" th:object="${agendamento}" method="post">
+            <label for="nomeCliente">Nome:</label>
+            <input type="text" th:field="*{nomeCliente}" placeholder="Seu nome" required />
+
+            <label for="telefone">Telefone:</label>
+            <input type="text" th:field="*{telefone}" placeholder="(99) 99999-9999" required />
+
+            <label for="profissional">Profissional:</label>
+            <select id="profissional" th:field="*{profissional}" required>
+                <option value="">Selecione...</option>
+                <option th:each="p : ${profissionais}" th:value="${p.id}" th:text="${p.nome}"></option>
+            </select>
+
+            <label for="data">Data:</label>
+            <input type="date" name="data" th:field="*{data}" required />
+
+            <label for="horario">Horário:</label>
+            <select id="horario" name="horario" th:field="*{horario}" required>
+                <option value="">Selecione o horário</option>
+            </select>
+
+            <button type="submit">Agendar</button>
+        </form>
+        <a class="back-button" th:href="@{/}">← Voltar para tela inicial</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const profissionalSelect = document.querySelector('#profissional');
+            const dataInput = document.querySelector('[name="data"]');
+            const horarioSelect = document.querySelector('#horario');
+
+            function buscarHorarios() {
+                const profissionalId = profissionalSelect.value;
+                const data = dataInput.value;
+
+                if (profissionalId && data) {
+                    fetch(`/horarios-disponiveis?profissionalId=${profissionalId}&data=${data}`)
+                        .then(response => response.json())
+                        .then(horarios => {
+                            horarioSelect.innerHTML = '<option value="">Selecione o horário</option>';
+                            horarios.forEach(hora => {
+                                const option = document.createElement('option');
+                                option.value = hora;
+                                option.textContent = hora;
+                                horarioSelect.appendChild(option);
+                            });
+                        });
+                }
+            }
+
+            profissionalSelect.addEventListener('change', buscarHorarios);
+            dataInput.addEventListener('change', buscarHorarios);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Profissionais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('/img/local.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="bg-black bg-opacity-50 p-8 font-sans">
+
+    <div class="max-w-3xl mx-auto bg-white bg-opacity-90 p-6 rounded shadow-md">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-700">Cadastrar Profissional</h2>
+
+        <form th:action="@{/profissionais}" th:object="${profissional}" method="post" class="space-y-4">
+            <div>
+                <label class="block text-gray-600">Nome:</label>
+                <input th:field="*{nome}" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"/>
+            </div>
+
+            <div>
+                <label class="block text-gray-600">Especialidade:</label>
+                <input th:field="*{especialidade}" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"/>
+            </div>
+
+            <div>
+                <label class="block text-gray-600">Ativo:</label>
+                <select th:field="*{ativo}" class="w-full px-4 py-2 border rounded-md focus:outline-none">
+                    <option th:value="true">Sim</option>
+                    <option th:value="false">Não</option>
+                </select>
+            </div>
+
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition">Salvar</button>
+        </form>
+    </div>
+
+    <!-- Botão Ver Profissionais Ativos -->
+    <div class="max-w-4xl mx-auto mt-8 flex justify-center">
+        <a href="/profissionais-ativos" 
+           class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+            Ver Profissionais Ativos
+        </a>
+    </div>
+
+    <!-- Lista de profissionais -->
+    <div class="max-w-4xl mx-auto mt-6">
+        <h3 class="text-xl font-semibold mb-2 text-white">Profissionais Cadastrados</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div th:each="p : ${profissionais}" class="bg-white bg-opacity-90 p-4 rounded shadow hover:shadow-md transition">
+                <p class="text-gray-800 font-medium" th:text="${p.nome}"></p>
+                <p class="text-gray-500" th:text="${p.especialidade}"></p>
+                <p class="text-sm text-gray-600" th:text="'Ativo: ' + (${p.ativo} ? 'Sim' : 'Não')"></p>
+
+                <!-- Form para alterar status -->
+                <form th:action="@{'/profissionais/' + ${p.id} + '/status'}" method="post">
+                    <input type="hidden" name="ativo" th:value="${!p.ativo}" />
+                    <button type="submit"
+                            th:text="${p.ativo} ? 'Inativar' : 'Ativar'"
+                            class="mt-2 bg-yellow-500 text-white px-4 py-1 rounded hover:bg-yellow-600 transition">
+                    </button>
+                </form>
+
+                <!-- Form para excluir profissional -->
+                <form th:action="@{'/profissionais/' + ${p.id} + '/excluir'}" method="post" class="mt-2">
+                    <button type="submit"
+                            onclick="return confirm('Tem certeza que deseja excluir este profissional?');"
+                            class="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition">
+                        Excluir
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botões de navegação -->
+    <div class="max-w-4xl mx-auto mt-10 flex justify-between">
+        <a href="/usuarios" class="bg-gray-700 text-white px-6 py-2 rounded hover:bg-gray-800 transition">← Voltar para Usuários</a>
+        <a href="/" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition">🏠 Página Principal</a>
+    </div>
+
+</body>
+</html>

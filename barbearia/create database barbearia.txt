@@ -1,0 +1,41 @@
+
+CREATE DATABASE IF NOT EXISTS barbearia;
+USE barbearia;
+
+-- Tabela de Usuários (clientes e admins)
+CREATE TABLE usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(20),
+    senha VARCHAR(100) NOT NULL,
+    tipo_acesso ENUM('cliente', 'admin') DEFAULT 'cliente'
+);
+
+-- Tabela de Profissionais
+CREATE TABLE profissional (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    especialidade VARCHAR(100),
+    ativo BOOLEAN DEFAULT TRUE
+);
+
+-- Tabela de Agendamentos
+CREATE TABLE agendamento (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome_cliente VARCHAR(100) NOT NULL,
+    data DATE NOT NULL,
+    horario TIME NOT NULL,
+    profissional_id INT NOT NULL,
+    observacoes TEXT,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (profissional_id) REFERENCES profissional(id)
+);
+
+
+
+-- Índice para evitar agendamentos duplicados no mesmo horário e profissional
+CREATE UNIQUE INDEX idx_horario_profissional ON agendamento (data, hora, profissional_id);
+
+
+INSERT INTO `barbearia`.`usuario` (`id`, `cpf`, `nome`, `telefone`, `senha`, `tipo_acesso`) VALUES ('1', '123456789', 'murilo', '17111111111', '1234', 'admin');

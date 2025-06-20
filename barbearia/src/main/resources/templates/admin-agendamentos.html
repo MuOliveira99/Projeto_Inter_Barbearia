@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Agendamentos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('/img/local.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+
+<body class="bg-black bg-opacity-60 min-h-screen p-8 font-sans">
+
+    <div class="max-w-6xl mx-auto bg-white bg-opacity-90 rounded-lg p-6 shadow-md">
+
+        <h2 class="text-3xl font-bold mb-6 text-gray-700">Lista de Agendamentos</h2>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full border border-gray-300 rounded-md divide-y divide-gray-200 bg-white text-gray-800">
+                <thead class="bg-blue-600 text-white">
+                    <tr>
+                        <th class="py-3 px-6 text-left">Cliente</th>
+                        <th class="py-3 px-6 text-left">Telefone</th>
+                        <th class="py-3 px-6 text-left">Profissional</th>
+                        <th class="py-3 px-6 text-left">Data</th>
+                        <th class="py-3 px-6 text-left">Horário</th>
+                    </tr>
+                </thead>
+                <tbody th:each="ag : ${agendamentos}" class="divide-y divide-gray-200">
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="py-2 px-6" th:text="${ag.nomeCliente}">Cliente</td>
+                        <td class="py-2 px-6" th:text="${ag.telefone}">Telefone</td>
+                        <td class="py-2 px-6" th:text="${ag.profissional.nome}">Profissional</td>
+                        <td class="py-2 px-6" th:text="${ag.dataFormatada}">Data</td>
+                        <td class="py-2 px-6" th:text="${ag.horario}">Horário</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-6">
+            <a th:href="@{/usuarios}"
+                class="inline-block bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition">&larr; Voltar</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

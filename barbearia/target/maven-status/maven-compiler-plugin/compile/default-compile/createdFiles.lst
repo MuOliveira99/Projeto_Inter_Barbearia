@@ -1,0 +1,14 @@
+com\barbearia\repository\UsuarioRepository.class
+com\barbearia\model\Agendamento.class
+com\barbearia\repository\AgendamentoRepository.class
+com\barbearia\controller\ProfissionalController.class
+com\barbearia\BarbeariaApplication.class
+com\barbearia\model\Profissional.class
+com\barbearia\service\UsuarioService.class
+com\barbearia\repository\ProfissionalRepository.class
+com\barbearia\service\AgendamentoService.class
+com\barbearia\controller\AdminController.class
+com\barbearia\model\Usuario.class
+com\barbearia\controller\UsuarioController.class
+com\barbearia\model\Usuario$TipoAcesso.class
+com\barbearia\service\ProfissionalService.class
