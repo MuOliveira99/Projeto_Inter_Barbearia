@@ -1,6 +1,6 @@
 #  ✂️ Blades & Bytes - Website de Agendamento de Barbearia ✂️ 
 
-# Introdução :
+# Introdução 
 O projeto Blades & Bytes é um sistema web desenvolvido para facilitar o agendamento de serviços em barbearias.
  Com ele, clientes podem marcar horários com barbeiros de forma prática e rápida, enquanto os administradores gerenciam os cadastros de clientes, profissionais e serviços oferecidos.
  Construído em Java utilizando Spring Boot, o sistema integra conceitos de banco de dados, engenharia de software e desenvolvimento web para entregar uma solução eficiente e acessível.
