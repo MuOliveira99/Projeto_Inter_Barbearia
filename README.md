@@ -72,7 +72,10 @@ IDE (Visual Studio Code, IntelliJ IDEA ou Eclipse) .
 
 ## Autores 
 
-Murilo Henrique Santos de Oliveira
+Murilo Henrique Santos de Oliveira 
+
 Gabriela Santos Ortis
+
+
 Lucas Grebalos deSouza
 
